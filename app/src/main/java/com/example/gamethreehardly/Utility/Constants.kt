@@ -1,4 +1,4 @@
-package com.example.gamethreehardly.Utility
+package com.example.gamethreeinrow.Utility
 
 object Constants {
 

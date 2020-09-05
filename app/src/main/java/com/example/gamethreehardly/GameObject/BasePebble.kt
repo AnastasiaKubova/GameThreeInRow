@@ -1,10 +1,10 @@
-package com.example.gamethreehardly.GameObject
+package com.example.gamethreeinrow.GameObject
 
 import android.graphics.*
-import com.example.gamethreehardly.Enum.ColorType
-import com.example.gamethreehardly.Enum.PebbleType
-import com.example.gamethreehardly.Utility.BitmapFactory
-import com.example.gamethreehardly.Utility.Constants
+import com.example.gamethreeinrow.Enum.ColorType
+import com.example.gamethreeinrow.Enum.PebbleType
+import com.example.gamethreeinrow.Utility.BitmapFactory
+import com.example.gamethreeinrow.Utility.Constants
 import org.jetbrains.annotations.NotNull
 import java.util.*
 

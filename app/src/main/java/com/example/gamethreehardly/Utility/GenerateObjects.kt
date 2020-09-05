@@ -1,10 +1,10 @@
-package com.example.gamethreehardly.Utility
+package com.example.gamethreeinrow.Utility
 
-import com.example.gamethreehardly.Enum.ColorType
-import com.example.gamethreehardly.Enum.NeighborSide
-import com.example.gamethreehardly.GameObject.BasePebble
-import com.example.gamethreehardly.GameObject.Coordinate
-import com.example.gamethreehardly.GameObject.OrdinaryPebble
+import com.example.gamethreeinrow.Enum.ColorType
+import com.example.gamethreeinrow.Enum.NeighborSide
+import com.example.gamethreeinrow.GameObject.BasePebble
+import com.example.gamethreeinrow.GameObject.Coordinate
+import com.example.gamethreeinrow.GameObject.OrdinaryPebble
 import kotlin.random.Random
 
 object GenerateObjects {

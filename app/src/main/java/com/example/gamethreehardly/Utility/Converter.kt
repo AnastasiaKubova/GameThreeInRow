@@ -1,8 +1,8 @@
-package com.example.gamethreehardly.Utility
+package com.example.gamethreeinrow.Utility
 
 import android.content.Context
 import android.util.DisplayMetrics
-import com.example.gamethreehardly.App
+import com.example.gamethreeinrow.App
 
 object Converter {
 

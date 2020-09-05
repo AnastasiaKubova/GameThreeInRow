@@ -1,7 +1,7 @@
-package com.example.gamethreehardly.GameObject
+package com.example.gamethreeinrow.GameObject
 
-import com.example.gamethreehardly.Enum.ColorType
-import com.example.gamethreehardly.Enum.PebbleType
+import com.example.gamethreeinrow.Enum.ColorType
+import com.example.gamethreeinrow.Enum.PebbleType
 
 class OrdinaryPebble(mColor: ColorType, coords: Coordinate, mSize: Float)
     : BasePebble(PebbleType.Orinary, mColor, 10, coords, mSize) {

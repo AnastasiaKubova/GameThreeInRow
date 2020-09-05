@@ -1,9 +1,9 @@
-package com.example.gamethreehardly.Utility
+package com.example.gamethreeinrow.Utility
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import com.example.gamethreehardly.App
-import com.example.gamethreehardly.R
+import com.example.gamethreeinrow.App
+import com.example.gamethreeinrow.R
 
 class BitmapFactory {
 

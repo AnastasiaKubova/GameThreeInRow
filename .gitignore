@@ -1,6 +1,5 @@
 ./build
 build
-
 app/build
 *.apk
 .gradle/

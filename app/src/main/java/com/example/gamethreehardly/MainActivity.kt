@@ -1,4 +1,4 @@
-package com.example.gamethreehardly
+package com.example.gamethreeinrow
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -10,11 +10,11 @@ import android.view.SurfaceHolder
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.gamethreehardly.Enum.ColorType
-import com.example.gamethreehardly.GameObject.BasePebble
-import com.example.gamethreehardly.Utility.BitmapFactory
-import com.example.gamethreehardly.Utility.DrawingThread
-import com.example.gamethreehardly.Utility.GenerateObjects
+import com.example.gamethreeinrow.Enum.ColorType
+import com.example.gamethreeinrow.GameObject.BasePebble
+import com.example.gamethreeinrow.Utility.BitmapFactory
+import com.example.gamethreeinrow.Utility.DrawingThread
+import com.example.gamethreeinrow.Utility.GenerateObjects
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.statistic_game.*
 import javax.xml.transform.sax.TemplatesHandler

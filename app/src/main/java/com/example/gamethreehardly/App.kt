@@ -1,4 +1,4 @@
-package com.example.gamethreehardly
+package com.example.gamethreeinrow
 
 import android.app.Application
 import android.content.Context

@@ -1,4 +1,4 @@
-package com.example.gamethreehardly.Enum
+package com.example.gamethreeinrow.Enum
 
 enum class PebbleType {
     Orinary

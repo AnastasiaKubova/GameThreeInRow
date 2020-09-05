@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.1"
 
     defaultConfig {
-        applicationId "com.example.gamethreehardly"
+        applicationId "com.example.gamethreeinrow"
         minSdkVersion 24
         targetSdkVersion 30
         versionCode 1

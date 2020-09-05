@@ -1,4 +1,4 @@
-package com.example.gamethreehardly.GameObject
+package com.example.gamethreeinrow.GameObject
 
 class Coordinate(val x: Float, val y: Float) {
 

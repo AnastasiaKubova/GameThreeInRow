@@ -1,4 +1,4 @@
-package com.example.gamethreehardly.Utility
+package com.example.gamethreeinrow.Utility
 
 import android.graphics.Canvas
 import android.graphics.Paint
@@ -7,10 +7,10 @@ import android.os.HandlerThread
 import android.os.Message
 import android.view.MotionEvent
 import android.view.SurfaceHolder
-import com.example.gamethreehardly.GameObject.BasePebble
-import com.example.gamethreehardly.GameObject.Coordinate
-import com.example.gamethreehardly.GameObject.OrdinaryPebble
-import com.example.gamethreehardly.Utility.GenerateObjects.generatePebblesLevel
+import com.example.gamethreeinrow.GameObject.BasePebble
+import com.example.gamethreeinrow.GameObject.Coordinate
+import com.example.gamethreeinrow.GameObject.OrdinaryPebble
+import com.example.gamethreeinrow.Utility.GenerateObjects.generatePebblesLevel
 import kotlin.math.abs
 
 
