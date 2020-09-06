@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity(), View.OnTouchListener, SurfaceHolder.Ca
     var countBluePebble: Int = 0
     var countOriginPebble: Int = 0
     var countGreenPebble: Int = 0
+    private var pebblesList: MutableList<BasePebble> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,12 +57,14 @@ class MainActivity : AppCompatActivity(), View.OnTouchListener, SurfaceHolder.Ca
 
     override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
         mThread?.updateSize(width, height)
-        mThread?.refresh()
+        if (pebblesList.count() == 0) {
+            pebblesList = GenerateObjects.generatePebblesLevel( COINT_PEBBLE, COINT_PEBBLE, (width / COINT_PEBBLE).toFloat())
+        }
+        mThread?.refresh(pebblesList)
     }
 
     override fun surfaceDestroyed(holder: SurfaceHolder) {
         mThread?.quit()
-        mThread = null
     }
 
     override fun surfaceCreated(holder: SurfaceHolder) {
@@ -69,7 +72,8 @@ class MainActivity : AppCompatActivity(), View.OnTouchListener, SurfaceHolder.Ca
     }
 
     private fun handleRefreshClick() {
-        mThread?.refresh()
+        pebblesList = GenerateObjects.generatePebblesLevel( COINT_PEBBLE, COINT_PEBBLE, (game_play_view.width / COINT_PEBBLE).toFloat())
+        mThread?.refresh(pebblesList)
         countGrayPebble = 0
         countBrownPebble = 0
         countBluePebble = 0

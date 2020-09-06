@@ -5,6 +5,7 @@ import android.graphics.Paint
 import android.os.Handler
 import android.os.HandlerThread
 import android.os.Message
+import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import com.example.gamethreeinrow.GameObject.BasePebble
@@ -42,12 +43,10 @@ class DrawingThread(private var holder: SurfaceHolder?, private val countPebble:
     }
 
     /**
-     * Update scene with new pebbles.
+     * Draw scene with new pebbles.
      */
-    fun refresh() {
-
-        /* Generate new pebbles. */
-        pebblesList = generatePebblesLevel(countPebble, countPebble, (gameWidth / countPebble).toFloat())
+    fun refresh(pebbles: MutableList<BasePebble>) {
+        pebblesList = pebbles
         clearCurrentData()
         drawScene()
     }
@@ -133,8 +132,10 @@ class DrawingThread(private var holder: SurfaceHolder?, private val countPebble:
      * @param collisionPebble - pebble with which performed exchange.
      */
     private fun checkCollisions(pebble: BasePebble, collisionPebble: BasePebble) : Boolean {
-        val newPebbleOne = checkCollisionAndReplacePebbles(OrdinaryPebble(pebble.colorType, collisionPebble.coordinate, pebble.size), pebble)
-        val newPebbleTwo =  checkCollisionAndReplacePebbles(OrdinaryPebble(collisionPebble.colorType, pebble.coordinate, collisionPebble.size), collisionPebble)
+        val pebbleOne = OrdinaryPebble(pebble.colorType, collisionPebble.coordinate, pebble.size)
+        val pebbleTwo = OrdinaryPebble(collisionPebble.colorType, pebble.coordinate, collisionPebble.size)
+        val newPebbleOne = checkCollisionAndReplacePebbles(pebbleOne, pebble)
+        val newPebbleTwo =  checkCollisionAndReplacePebbles(pebbleTwo, collisionPebble)
         return newPebbleOne || newPebbleTwo
     }
 
@@ -144,9 +145,9 @@ class DrawingThread(private var holder: SurfaceHolder?, private val countPebble:
      * @param newPebble - pebble for which search collision.
      * @param lastPebble - pebble which was moved.
      */
-    private fun checkCollisionAndReplacePebbles(newPebble: BasePebble, lastPebble: BasePebble) : Boolean {
-        val verticalObjects: MutableList<BasePebble> = checkCollisionByVertical(newPebble, lastPebble)
-        val horizontalObjects: MutableList<BasePebble> = checkCollisionByHorizontal(newPebble, lastPebble)
+    private fun checkCollisionAndReplacePebbles(newPebble: BasePebble, pebble: BasePebble) : Boolean {
+        val verticalObjects: MutableList<BasePebble> = checkCollisionByVertical(newPebble, pebble)
+        val horizontalObjects: MutableList<BasePebble> = checkCollisionByHorizontal(newPebble, pebble)
         if (verticalObjects.size > 1) {
             replacePebbles(verticalObjects)
         }
@@ -154,7 +155,7 @@ class DrawingThread(private var holder: SurfaceHolder?, private val countPebble:
             replacePebbles(horizontalObjects)
         }
         if (horizontalObjects.size > 1 || verticalObjects.size > 1) {
-            replacePebbles(mutableListOf(lastPebble))
+            replacePebbles(mutableListOf(pebble))
         }
         return verticalObjects.size > 1 || horizontalObjects.size > 1
     }
@@ -165,10 +166,10 @@ class DrawingThread(private var holder: SurfaceHolder?, private val countPebble:
      * @param newPebble - pebble for which search collision.
      * @param lastPebble - pebble which was moved.
      */
-    private fun checkCollisionByVertical(newPebble: BasePebble, lastPebble: BasePebble) : MutableList<BasePebble> {
+    private fun checkCollisionByVertical(newPebble: BasePebble, pebble: BasePebble) : MutableList<BasePebble> {
         val verticalObjects: MutableList<BasePebble> = mutableListOf()
-        verticalObjects.addAll(getNeighborsPebbles(newPebble, lastPebble,0, newPebble.size.toInt()))
-        verticalObjects.addAll(getNeighborsPebbles(newPebble, lastPebble,0, newPebble.size.toInt() * -1))
+        verticalObjects.addAll(getNeighborsPebbles(newPebble, pebble,0, newPebble.size.toInt()))
+        verticalObjects.addAll(getNeighborsPebbles(newPebble, pebble,0, newPebble.size.toInt() * -1))
         return verticalObjects
     }
 
@@ -191,7 +192,7 @@ class DrawingThread(private var holder: SurfaceHolder?, private val countPebble:
      * @param incrementX - distance between neighbor along the axis X.
      * @param incrementY - distance between neighbor along the axis Y.
      */
-    private fun getNeighborsPebbles(newPebble: BasePebble, lastPebble: BasePebble, incrementX: Int, incrementY: Int): MutableSet<BasePebble> {
+    private fun getNeighborsPebbles(newPebble: BasePebble, pebble: BasePebble, incrementX: Int, incrementY: Int): MutableSet<BasePebble> {
         val verticalObjects: MutableSet<BasePebble> = mutableSetOf()
         var hasCollision = true
         var nextCoords = Coordinate(newPebble.coordinate.x, newPebble.coordinate.y)
@@ -200,9 +201,8 @@ class DrawingThread(private var holder: SurfaceHolder?, private val countPebble:
             val nextPebble = findPebbleByCoordinate(nextCoords)
             if (nextPebble != null
                 && nextPebble.colorType == newPebble.colorType
-                && !nextPebble.equals(lastPebble)) {
+                && !nextPebble.equals(pebble)) {
                 verticalObjects.add(nextPebble)
-                nextPebble.coordinate = nextCoords
             } else {
                 hasCollision = false
             }
@@ -262,12 +262,9 @@ class DrawingThread(private var holder: SurfaceHolder?, private val countPebble:
      * @param - coordinate where should be pebble.
      */
     private fun findPebbleByCoordinate(coordinate: Coordinate): BasePebble? {
-        pebblesList.let {
-            it.forEach {
-                if (it.coordinate.equals(coordinate)
-                ) {
-                    return it
-                }
+        pebblesList.forEach {
+            if (it.coordinate.equals(coordinate)) {
+                return it
             }
         }
         return null

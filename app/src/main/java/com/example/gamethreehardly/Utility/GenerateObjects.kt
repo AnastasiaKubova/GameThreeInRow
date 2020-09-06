@@ -1,5 +1,6 @@
 package com.example.gamethreeinrow.Utility
 
+import android.util.Log
 import com.example.gamethreeinrow.Enum.ColorType
 import com.example.gamethreeinrow.Enum.NeighborSide
 import com.example.gamethreeinrow.GameObject.BasePebble
@@ -96,9 +97,9 @@ object GenerateObjects {
             }
         }
         pebbles.forEach {
-            if (it.coordinate.x == neighborCoords.x
-                && it.coordinate.y == neighborCoords.y)
+            if (it.coordinate.equals(neighborCoords)) {
                 return it
+            }
         }
         return null
     }
